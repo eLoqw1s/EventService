@@ -9,7 +9,7 @@ namespace EventService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
+    //[Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -31,12 +31,18 @@ namespace EventService.Controllers
             return Ok(newsId);
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpGet("NewGetAll")]
-        public async Task<ActionResult<List<New>>> Index()
+        public async Task<ActionResult<List<New>>> Get()
         {
             var news = await _newsRepository.GetAllNews();
             return Ok(news);
+        }
+
+        [HttpGet("Index")]
+        public IActionResult Index()
+        {
+            return View();
         }
 
         [HttpGet("Privacy")]

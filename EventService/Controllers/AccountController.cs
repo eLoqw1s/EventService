@@ -15,22 +15,48 @@ namespace EventService.Controllers
             _authorService = authorService;
         }
 
-        [HttpPost("/register")]
-        public async Task<IResult> Register(RegisterAuthorRequest request)
+        [HttpGet("register")]
+        public IActionResult Register()
         {
-            await _authorService.Register(request.Name, request.Email, request.Password);
-
-            return Results.Ok();
+            return View();
         }
 
-        [HttpPost("/login")]
-        public async Task<IResult> Login(LoginAuthorRequest request)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromForm] RegisterAuthorRequest request)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
+            await _authorService.Register(request.Name, request.Email, request.Password);
+
+            return RedirectToAction("Login");
+        }
+
+        [HttpGet("login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromForm] LoginAuthorRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(request);
+            }
+
             var token = await _authorService.Login(request.Email, request.Password);
+
+            if(token == null)
+            {
+                return View(request);
+            }
 
             Response.Cookies.Append("notJwtToken", token);
 
-            return Results.Ok();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

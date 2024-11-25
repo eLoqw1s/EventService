@@ -35,7 +35,7 @@ namespace EventService.Services
         {
             var authorEntity = await _authorRepository.GetByEmail(email);
 
-            var result = _passwordHasher.Verify(email, authorEntity.PasswordHashed);
+            var result = _passwordHasher.Verify(password, authorEntity.PasswordHashed);
 
             if (!result)
             {

@@ -21,10 +21,9 @@ namespace EventService.Repositories
             return newsEntities;
         }
 
-        public async Task<Guid> Delete(Guid AuthorId, Guid Id)
+        public async Task<Guid> Delete(Guid Id)
         {
             var newsRows = await _context.News
-                .Where(b => b.AuthorId == AuthorId)
                 .Where(b => b.Id == Id)
                 .ExecuteDeleteAsync();
 
