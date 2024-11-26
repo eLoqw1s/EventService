@@ -21,6 +21,26 @@ namespace EventService.Repositories
             return newsEntities;
         }
 
+        public async Task<Guid> Update(Guid AuthorId, Guid Id, string Topic, string Text, string Importance, DateTime InputTime)
+        {
+            var newsEntity = await _context.News.FirstOrDefaultAsync(note => note.Id == Id);
+
+            if (newsEntity == null || newsEntity.AuthorId != AuthorId)
+            {
+                throw new Exception("news not found");
+            }
+
+            newsEntity.Topic = Topic;
+            newsEntity.Text = Text;
+            newsEntity.Importance = Importance;
+            newsEntity.InputTime = InputTime;
+
+            await _context.SaveChangesAsync();
+
+            return newsEntity.Id;
+        }
+
+
         public async Task<Guid> Delete(Guid Id)
         {
             var newsRows = await _context.News

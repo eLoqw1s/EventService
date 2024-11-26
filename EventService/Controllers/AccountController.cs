@@ -15,11 +15,11 @@ namespace EventService.Controllers
             _authorService = authorService;
         }
 
-        [HttpGet("register")]
-        public IActionResult Register()
-        {
-            return View();
-        }
+        //[HttpGet("register")]
+        //public IActionResult Register()
+        //{
+        //    return View();
+        //}
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromForm] RegisterAuthorRequest request)

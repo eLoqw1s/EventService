@@ -4,6 +4,7 @@ using EventService.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace EventService.Controllers
 {
@@ -32,11 +33,28 @@ namespace EventService.Controllers
         }
 
         //[AllowAnonymous]
-        [HttpGet("NewGetAll")]
+        [HttpGet("GetAll")]
         public async Task<ActionResult<List<New>>> Get()
         {
             var news = await _newsRepository.GetAllNews();
             return Ok(news);
+        }
+
+        [HttpDelete("{id:guid}")]
+        public async Task<ActionResult<Guid>> Delete(Guid Id)
+        {
+            var newsId = await _newsRepository.Delete(Id);
+            _logger.LogInformation("NewsId {newsId}", newsId);
+            return Ok(newsId);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<Guid>> Update(UpdateNewsDTO updateNewsDTO)
+        {
+            var newsId = _newsRepository.Update(authorId, updateNewsDTO.Id, updateNewsDTO.Topic, updateNewsDTO.Text,
+                updateNewsDTO.Importance, DateTime.Now);
+
+            return Ok(newsId);
         }
 
         [HttpGet("Index")]
