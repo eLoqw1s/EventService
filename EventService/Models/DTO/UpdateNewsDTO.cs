@@ -4,6 +4,8 @@
     (
         string Topic,
         string Text,
-        int Importance
+        int Importance,
+        DateTime StartPublication,
+        DateTime EndPublication
     );
 }

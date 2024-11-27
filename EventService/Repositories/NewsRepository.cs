@@ -34,7 +34,8 @@ namespace EventService.Repositories
             return newEntity;
         }
 
-        public async Task<Guid> UpdateNews(Guid Id, string Topic, string Text, int Importance, DateTime InputTime)
+        public async Task<Guid> UpdateNews(Guid Id, string Topic, string Text, 
+            int Importance, DateTime StartPublication, DateTime EndPublication)
         {
             var newsEntity = await _context.News.FirstOrDefaultAsync(note => note.Id == Id);
 
@@ -46,7 +47,9 @@ namespace EventService.Repositories
             newsEntity.Topic = Topic;
             newsEntity.Text = Text;
             newsEntity.Importance = Importance;
-            newsEntity.InputTime = InputTime;
+            newsEntity.InputTime = DateTime.Now;
+            newsEntity.StartPublication = StartPublication;
+            newsEntity.EndPublication = EndPublication;
 
             await _context.SaveChangesAsync();
 

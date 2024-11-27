@@ -57,7 +57,8 @@ namespace EventService.Controllers
             if (ModelState.IsValid)
             {
                 var newsId = await _newsRepository.UpdateNews(id, updateNewsDTO.Topic, updateNewsDTO.Text,
-                updateNewsDTO.Importance, DateTime.Now);
+                updateNewsDTO.Importance, updateNewsDTO.StartPublication, 
+                updateNewsDTO.EndPublication);
 
                 return RedirectToAction("Index");
             }
