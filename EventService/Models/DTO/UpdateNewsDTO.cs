@@ -2,9 +2,8 @@
 {
     public record UpdateNewsDTO
     (
-        Guid Id,
         string Topic,
         string Text,
-        string Importance
+        int Importance
     );
 }

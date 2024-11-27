@@ -1,0 +1,48 @@
+﻿@model List<New>
+
+@{
+    ViewData["Title"] = "Список Новостей";
+}
+
+<h2>Список Новостей</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Тема</th>
+            <th>Текст</th>
+            <th>Дата начала</th>
+            <th>Дата окончания</th>
+            <th>Важность</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var newsItem in Model)
+        {
+            <tr>
+                <td>@newsItem.Topic</td>
+                <td>@newsItem.Text</td>
+                <td>@newsItem.StartPublication.ToShortDateString()</td>
+                <td>@newsItem.EndPublication.ToShortDateString()</td>
+                <td>@newsItem.Importance</td>
+                <td>
+                    <form asp-action="DeleteNews" method="post" asp-route-id="@newsItem.Id" style="display:inline">
+                        <button type="submit">Удалить</button>
+                    </form>
+                    <a asp-action="UpdateNews" asp-route-id="@newsItem.Id">Редактировать</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Добавить новость</h3>
+<form asp-action="CreateNews" method="post">
+    <input type="text" name="Topic" placeholder="Тема" required />
+    <input type="datetime-local" name="StartPublication" placeholder="Дата начала" required />
+    <input type="datetime-local" name="EndPublication" placeholder="Дата окончания" required />
+    <input type="number" name="Importance" placeholder="Важность" required />
+    <input name="Text" placeholder="Текст новости" required />
+    <button type="submit">Добавить</button>
+</form>

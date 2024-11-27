@@ -7,7 +7,7 @@
         public DateTime EndPublication { get; set; }
         public string Topic { get; set; }
         public string Text { get; set; }
-        public string Importance { get; set; }
+        public int Importance { get; set; }
         public DateTime InputTime { get; set; }
         public Guid AuthorId { get; set; }
         public Author Author { get; set; }

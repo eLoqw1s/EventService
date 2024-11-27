@@ -21,11 +21,24 @@ namespace EventService.Repositories
             return newsEntities;
         }
 
-        public async Task<Guid> Update(Guid AuthorId, Guid Id, string Topic, string Text, string Importance, DateTime InputTime)
+        public async Task<New> GetNewById(Guid Id)
+        {
+            var newEntity = await _context.News
+                .FirstOrDefaultAsync(news => news.Id == Id);
+
+            if (newEntity == null)
+            {
+                throw new Exception("New not found");
+            }
+
+            return newEntity;
+        }
+
+        public async Task<Guid> UpdateNews(Guid Id, string Topic, string Text, int Importance, DateTime InputTime)
         {
             var newsEntity = await _context.News.FirstOrDefaultAsync(note => note.Id == Id);
 
-            if (newsEntity == null || newsEntity.AuthorId != AuthorId)
+            if (newsEntity == null)
             {
                 throw new Exception("news not found");
             }
@@ -41,7 +54,7 @@ namespace EventService.Repositories
         }
 
 
-        public async Task<Guid> Delete(Guid Id)
+        public async Task<Guid> DeleteNews(Guid Id)
         {
             var newsRows = await _context.News
                 .Where(b => b.Id == Id)
@@ -56,7 +69,7 @@ namespace EventService.Repositories
         }
 
         public async Task<Guid> CreateNew(Guid Id, DateTime StartPublication, DateTime EndPublication, string Topic, string Text,
-            string Importance, Guid AuthorId)
+            int Importance, Guid AuthorId)
         {
             var newsEntity = new New
             {

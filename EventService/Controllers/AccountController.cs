@@ -21,7 +21,7 @@ namespace EventService.Controllers
         //    return View();
         //}
 
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public async Task<IActionResult> Register([FromForm] RegisterAuthorRequest request)
         {
             if (!ModelState.IsValid)
@@ -33,13 +33,13 @@ namespace EventService.Controllers
             return RedirectToAction("Login");
         }
 
-        [HttpGet("login")]
+        [HttpGet("Login")]
         public IActionResult Login()
         {
             return View();
         }
 
-        [HttpPost("login")]
+        [HttpPost("Login")]
         public async Task<IActionResult> Login([FromForm] LoginAuthorRequest request)
         {
             if (!ModelState.IsValid)
@@ -56,7 +56,7 @@ namespace EventService.Controllers
 
             Response.Cookies.Append("notJwtToken", token);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

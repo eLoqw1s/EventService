@@ -1,4 +1,6 @@
-﻿namespace EventService.Models.DTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EventService.Models.DTO
 {
     public record CreateNewsDto
     (
@@ -6,6 +8,6 @@
         DateTime EndPublication,
         string Topic,
         string Text,
-        string Importance
+        int Importance
         );
 }
