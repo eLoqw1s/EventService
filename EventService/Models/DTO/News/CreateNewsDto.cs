@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EventService.Models.DTO
+namespace EventService.Models.DTO.News
 {
     public record CreateNewsDto
     (

@@ -2,15 +2,29 @@
 
 <h2>Редактировать новость</h2>
 <form asp-action="UpdateNews" method="post">
-    
-    <input type="text" asp-for="Topic" placeholder="Тема" required />
-    <input type="datetime-local" asp-for="StartPublication" placeholder="Дата начала" required />
-    <input type="datetime-local" asp-for="EndPublication" placeholder="Дата окончания" required />
-    <input type="number" asp-for="Importance" placeholder="Важность" required />
-    <input type="text" asp-for="Text" placeholder="Текст новости" required />
-    <form asp-action="UpdateNews" method="post" asp-route-id="Model.Id" style="display:inline">
-        <button type="submit">Сохранить изменения</button>
-    </form>
+	<div>
+		<label for="Topic">Тема</label>
+		<input type="text" asp-for="Topic" placeholder="Тема" required />
+	</div>
+	<div>
+		<label for="StartPublication">Дата начала</label>
+		<input type="datetime-local" asp-for="StartPublication" placeholder="Дата начала" required />
+	</div>
+	<div>
+		<label for="EndPublication">Дата окончания</label>
+		<input type="datetime-local" asp-for="EndPublication" placeholder="Дата окончания" required />
+	</div>
+	<div>
+		<label for="Importance">Важность</label>
+		<input type="number" asp-for="Importance" placeholder="Важность" required />
+	</div>
+	<div>
+		<label for="Text">Текст новости</label>
+		<input type="text" asp-for="Text" placeholder="Текст новости" required />
+	</div>
+	<form asp-action="UpdateNews" method="post" asp-route-id="Model.Id" style="display:inline">
+		<button type="submit">Сохранить изменения</button>
+	</form>
 </form>
 
 <a asp-controller="Admin" asp-action="Index">Назад к списку новостей</a>

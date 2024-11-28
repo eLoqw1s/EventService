@@ -1,48 +1,68 @@
-﻿@model List<New>
+﻿@using EventService.Models.DTO.News
+@model List<GetNewsVm>
 
 @{
-    ViewData["Title"] = "Список Новостей";
+	ViewData["Title"] = "Список Новостей";
 }
 
 <h2>Список Новостей</h2>
 
 <table class="table">
-    <thead>
-        <tr>
-            <th>Тема</th>
-            <th>Текст</th>
-            <th>Дата начала</th>
-            <th>Дата окончания</th>
-            <th>Важность</th>
-            <th>Действия</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var newsItem in Model)
-        {
-            <tr>
-                <td>@newsItem.Topic</td>
-                <td>@newsItem.Text</td>
-                <td>@newsItem.StartPublication.ToShortDateString()</td>
-                <td>@newsItem.EndPublication.ToShortDateString()</td>
-                <td>@newsItem.Importance</td>
-                <td>
-                    <form asp-action="DeleteNews" method="post" asp-route-id="@newsItem.Id" style="display:inline">
-                        <button type="submit">Удалить</button>
-                    </form>
-                    <a asp-action="UpdateNews" asp-route-id="@newsItem.Id">Редактировать</a>
-                </td>
-            </tr>
-        }
-    </tbody>
+	<thead>
+		<tr>
+			<th>Тема</th>
+			<th>Текст</th>
+			<th>Дата начала</th>
+			<th>Дата окончания</th>
+			<th>Важность</th>
+			<th>Время ввода</th>
+			<th>Автор</th>
+			<th>Действия</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var newsItem in Model)
+		{
+			<tr>
+				<td>@newsItem.Topic</td>
+				<td>@newsItem.Text</td>
+				<td>@newsItem.StartPublication.ToShortDateString()</td>
+				<td>@newsItem.EndPublication.ToShortDateString()</td>
+				<td>@newsItem.Importance</td>
+				<td>@newsItem.InputTime</td>
+				<td>@newsItem.AuthorName</td>
+				<td>
+					<form asp-action="DeleteNews" method="post" asp-route-id="@newsItem.Id" style="display:inline">
+						<button type="submit">Удалить</button>
+					</form>
+					<a asp-action="UpdateNews" asp-route-id="@newsItem.Id">Редактировать</a>
+				</td>
+			</tr>
+		}
+	</tbody>
 </table>
 
 <h3>Добавить новость</h3>
 <form asp-action="CreateNews" method="post">
-    <input type="text" name="Topic" placeholder="Тема" required />
-    <input type="datetime-local" name="StartPublication" placeholder="Дата начала" required />
-    <input type="datetime-local" name="EndPublication" placeholder="Дата окончания" required />
-    <input type="number" name="Importance" placeholder="Важность" required />
-    <input name="Text" placeholder="Текст новости" required />
-    <button type="submit">Добавить</button>
+	<div>
+		<label for="Topic">Тема</label>
+		<input type="text" name="Topic" placeholder="Тема" required />
+	</div>
+	<div>
+		<label for="StartPublication">Дата начала</label>
+		<input type="datetime-local" name="StartPublication" placeholder="Дата начала" required />
+	</div>
+	<div>
+		<label for="EndPublication">Дата окончания</label>
+		<input type="datetime-local" name="EndPublication" placeholder="Дата окончания" required />
+	</div>
+	<div>
+		<label for="Importance">Важность</label>
+		<input type="number" name="Importance" placeholder="Важность" required />
+	</div>
+	<div>
+		<label for="Text">Текст новости</label>
+		<input name="Text" placeholder="Текст новости" required />
+	</div>
+	<button type="submit">Добавить</button>
 </form>

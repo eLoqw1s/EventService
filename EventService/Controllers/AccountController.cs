@@ -1,4 +1,4 @@
-﻿using EventService.Models.DTO;
+﻿using EventService.Models.DTO.Auth;
 using EventService.Services;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,5 +1,6 @@
 ﻿using EventService.Interfaces;
 using EventService.Models;
+using EventService.Models.DTO.News;
 using Microsoft.EntityFrameworkCore;
 
 namespace EventService.Repositories
@@ -13,12 +14,23 @@ namespace EventService.Repositories
             _context = context;
         }
 
-        public async Task<List<New>> GetAllNews()
+        public async Task<List<GetNewsVm>> GetAllNews()
         {
-            var newsEntities = await _context.News
+            var newsVmEntities = await _context.News
+                .Include(n => n.Author)
+                .Select(n => new GetNewsVm(
+                    n.Id,
+                    n.StartPublication,
+                    n.EndPublication,
+                    n.Topic,
+                    n.Text,
+                    n.Importance,
+                    n.InputTime,
+                    n.Author.Name))
                 .AsNoTracking()
                 .ToListAsync();
-            return newsEntities;
+
+            return newsVmEntities;
         }
 
         public async Task<New> GetNewById(Guid Id)
@@ -71,12 +83,12 @@ namespace EventService.Repositories
             return Id;
         }
 
-        public async Task<Guid> CreateNew(Guid Id, DateTime StartPublication, DateTime EndPublication, string Topic, string Text,
-            int Importance, Guid AuthorId)
+        public async Task<Guid> CreateNew(DateTime StartPublication, DateTime EndPublication, 
+            string Topic, string Text, int Importance, Guid AuthorId)
         {
             var newsEntity = new New
             {
-                Id = Id,
+                Id = Guid.NewGuid(),
                 StartPublication = StartPublication,
                 EndPublication = EndPublication,
                 Topic = Topic,

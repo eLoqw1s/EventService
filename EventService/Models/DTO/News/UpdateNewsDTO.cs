@@ -1,4 +1,4 @@
-﻿namespace EventService.Models.DTO
+﻿namespace EventService.Models.DTO.News
 {
     public record UpdateNewsDTO
     (
