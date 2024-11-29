@@ -1,6 +1,7 @@
 ﻿using EventService.Interfaces;
 using EventService.Models;
-using EventService.Models.DTO.MemorableDate;
+using EventService.Models.DTO.Admin;
+using EventService.Models.DTO.MemorableDates;
 using EventService.Models.DTO.News;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,9 +33,16 @@ namespace EventService.Controllers
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
-            var news = await _newsRepository.GetAllNews();
-            _logger.LogInformation("NewsId {@news}", news);
-            return View(news);
+            var newsList = await _newsRepository.GetAllNews();
+            var memDatesList = await _memorabeDateRepository.GetAllMemDate();
+
+            var model = new AdminVm(
+                newsList,
+                memDatesList
+                );
+
+            _logger.LogInformation("NewsId {@news}", newsList);
+            return View(model);
         }
 
         [HttpPost("CreateNews")]

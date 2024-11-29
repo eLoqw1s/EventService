@@ -1,5 +1,5 @@
 ﻿using EventService.Models;
-using EventService.Models.DTO.MemorableDate;
+using EventService.Models.DTO.MemorableDates;
 
 namespace EventService.Interfaces
 {

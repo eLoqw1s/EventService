@@ -1,4 +1,4 @@
-﻿namespace EventService.Models.DTO.MemorableDate
+﻿namespace EventService.Models.DTO.MemorableDates
 {
 	public record UpdateMemDateDTO
 	(

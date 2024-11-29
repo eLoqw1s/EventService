@@ -1,7 +1,7 @@
 ﻿using EventService.Models;
 using Microsoft.EntityFrameworkCore;
 using EventService.Interfaces;
-using EventService.Models.DTO.MemorableDate;
+using EventService.Models.DTO.MemorableDates;
 
 namespace EventService.Repositories
 {

@@ -1,0 +1,19 @@
+﻿@model MemorableDate
+
+<h2>Редактировать памятную дату</h2>
+<form asp-action="UpdateMemDate" method="post">
+	<div>
+		<label for="TextNotification">Текст уведомления</label>
+		<input type="text" asp-for="TextNotification" placeholder="Текст уведомления" required />
+	</div>
+	<div>
+		<label for="EventDate">Дата события</label>
+		<input type="datetime-local" asp-for="EventDate" placeholder="Дата события" required />
+	</div>
+	<form asp-action="UpdateMemDate" method="post" asp-route-id="Model.Id" style="display:inline">
+		<button type="submit">Сохранить изменения</button>
+	</form>
+</form>
+
+<a asp-controller="Admin" asp-action="Index">Назад к списку новостей</a>
+
