@@ -5,7 +5,8 @@ namespace EventService.Interfaces
 {
     public interface INewsRepository
     {
-        Task<List<GetNewsVm>> GetAllNews();
+        Task<List<GetNewsVm>> GetNewsByDate(DateTime selectesDate);
+		Task<List<GetNewsVm>> GetAllNews();
         Task<Guid> CreateNew(DateTime StartPublication, DateTime EndPublication, string Topic, string Text,
             int Importance, Guid AuthorId);
         Task<Guid> DeleteNews(Guid Id);

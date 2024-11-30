@@ -1,0 +1,22 @@
+﻿@*Home*@
+@{
+    ViewBag.Title = "Поиск событий по дате";
+}
+@section HeaderContent{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+    </li>
+}
+
+<h1>Поиск событий по дате</h1>
+
+<form asp-controller="Home" asp-action="GetEventsByDate" method="get">
+    <div>
+        <label for="selectedTime">Введите дату:</label>
+        <input type="date" id="selectedTime" name="selectedTime" required />
+        <button type="submit">Найти</button>
+    </div>
+</form>

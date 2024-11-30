@@ -5,7 +5,8 @@ namespace EventService.Interfaces
 {
     public interface IMemorabeDateRepository
     {
-        Task<Guid> CreateMemDate(DateTime EventDate, string TextNotification, Guid AuthorId);
+        Task<List<GetMemDateVm>> GetMemDateByDate(DateTime selectesDate);
+		Task<Guid> CreateMemDate(DateTime EventDate, string TextNotification, Guid AuthorId);
         Task<Guid> DeleteMemDate(Guid Id);
         Task<List<GetMemDateVm>> GetAllMemDate();
         Task<MemorableDate> GetMemDateById(Guid Id);

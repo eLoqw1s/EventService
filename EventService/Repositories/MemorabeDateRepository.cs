@@ -14,6 +14,25 @@ namespace EventService.Repositories
 			_context = context;
 		}
 
+		public async Task<List<GetMemDateVm>> GetMemDateByDate(DateTime selectedDate)
+		{
+			var memDateEntities = await _context.MemorableDates
+				.Include(m => m.Author)
+				.Where(m => m.EventDate.Year == selectedDate.Year &&
+                    m.EventDate.Month == selectedDate.Month &&
+                    m.EventDate.Day == selectedDate.Day)
+				.Select(m => new GetMemDateVm(
+					m.Id,
+					m.EventDate,
+					m.TextNotification,
+					m.InputTime,
+					m.Author.Name))
+				.AsNoTracking()
+				.ToListAsync();
+
+			return memDateEntities;
+		}
+
 		public async Task<List<GetMemDateVm>> GetAllMemDate()
 		{
 			var memDateEntities = await _context.MemorableDates

@@ -1,75 +1,97 @@
-﻿@using EventService.Models.DTO.Admin
+﻿@*Admin*@
+@using EventService.Models.DTO.Admin
 @model AdminVm
 
 @{
 	ViewData["Title"] = "Список Новостей";
 }
+@section HeaderContent {
+	<li class="nav-item">
+		<form asp-controller="Account" asp-action="Logout" method="post">
+			<button type="submit">Logout</button>
+		</form>
+	</li>
+}
 
 <h2>Список Новостей</h2>
-<table class="table">
-	<thead>
-		<tr>
-			<th>Тема</th>
-			<th>Текст</th>
-			<th>Дата начала</th>
-			<th>Дата окончания</th>
-			<th>Важность</th>
-			<th>Время ввода</th>
-			<th>Автор</th>
-			<th>Действия</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var newsItem in Model.News)
-		{
+@if (Model.News.Any())
+{
+	<table class="table">
+		<thead>
 			<tr>
-				<td>@newsItem.Topic</td>
-				<td>@newsItem.Text</td>
-				<td>@newsItem.StartPublication</td>
-				<td>@newsItem.EndPublication</td>
-				<td>@newsItem.Importance</td>
-				<td>@newsItem.InputTime</td>
-				<td>@newsItem.AuthorName</td>
-				<td>
-					<form asp-action="DeleteNews" method="post" asp-route-id="@newsItem.Id" style="display:inline">
-						<button type="submit">Удалить</button>
-					</form>
-					<a asp-action="UpdateNews" asp-route-id="@newsItem.Id">Редактировать</a>
-				</td>
+				<th>Тема</th>
+				<th>Текст</th>
+				<th>Дата начала</th>
+				<th>Дата окончания</th>
+				<th>Важность</th>
+				<th>Время ввода</th>
+				<th>Автор</th>
+				<th>Действия</th>
 			</tr>
-		}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			@foreach (var newsItem in Model.News)
+			{
+				<tr>
+					<td>@newsItem.Topic</td>
+					<td>@newsItem.Text</td>
+					<td>@newsItem.StartPublication</td>
+					<td>@newsItem.EndPublication</td>
+					<td>@newsItem.Importance</td>
+					<td>@newsItem.InputTime</td>
+					<td>@newsItem.AuthorName</td>
+					<td>
+						<form asp-action="DeleteNews" method="post" asp-route-id="@newsItem.Id" style="display:inline">
+							<button type="submit">Удалить</button>
+						</form>
+						<a asp-action="UpdateNews" asp-route-id="@newsItem.Id">Редактировать</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+else
+{
+	<h4>Нет новостей для отображения.</h4>
+}
 
 <h2>Памятные даты</h2>
-<table class="table">
-	<thead>
-		<tr>
-			<th>Текст</th>
-			<th>Дата события</th>
-			<th>Время ввода</th>
-			<th>Автор</th>
-			<th>Действия</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach (var memDateItem in Model.MemDates)
-		{
+@if (Model.MemDates.Any())
+{
+	<table class="table">
+		<thead>
 			<tr>
-				<td>@memDateItem.TextNotification</td>
-				<td>@memDateItem.EventDate</td>
-				<td>@memDateItem.InputTime</td>
-				<td>@memDateItem.Name</td>
-				<td>
-					<form asp-action="DeleteMemDate" method="post" asp-route-id="@memDateItem.Id" style="display:inline">
-						<button type="submit">Удалить</button>
-					</form>
-					<a asp-action="UpdateMemDate" asp-route-id="@memDateItem.Id">Редактировать</a>
-				</td>
+				<th>Текст</th>
+				<th>Дата события</th>
+				<th>Время ввода</th>
+				<th>Автор</th>
+				<th>Действия</th>
 			</tr>
-		}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			@foreach (var memDateItem in Model.MemDates)
+			{
+				<tr>
+					<td>@memDateItem.TextNotification</td>
+					<td>@memDateItem.EventDate</td>
+					<td>@memDateItem.InputTime</td>
+					<td>@memDateItem.Name</td>
+					<td>
+						<form asp-action="DeleteMemDate" method="post" asp-route-id="@memDateItem.Id" style="display:inline">
+							<button type="submit">Удалить</button>
+						</form>
+						<a asp-action="UpdateMemDate" asp-route-id="@memDateItem.Id">Редактировать</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+else
+{
+	<h4>Нет памятных дат для отображения.</h4>
+}
 
 <h3>Добавить новость</h3>
 <form asp-action="CreateNews" method="post">

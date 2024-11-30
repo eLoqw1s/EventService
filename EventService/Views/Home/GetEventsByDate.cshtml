@@ -1,0 +1,79 @@
+﻿@*Home*@
+@using EventService.Models.DTO.Admin
+@model AdminVm
+
+@{
+	ViewData["Title"] = "Список Новостей";
+}
+@section HeaderContent {
+	<li class="nav-item">
+		<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+	</li>
+}
+
+<a asp-controller="Home" asp-action="Index">Выбрать другую дату</a>
+<h2>Список Новостей</h2>
+@if (Model.News.Any())
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Тема</th>
+				<th>Текст</th>
+				<th>Дата начала</th>
+				<th>Дата окончания</th>
+				<th>Важность</th>
+				<th>Время ввода</th>
+				<th>Автор</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var newsItem in Model.News)
+			{
+				<tr>
+					<td>@newsItem.Topic</td>
+					<td>@newsItem.Text</td>
+					<td>@newsItem.StartPublication</td>
+					<td>@newsItem.EndPublication</td>
+					<td>@newsItem.Importance</td>
+					<td>@newsItem.InputTime</td>
+					<td>@newsItem.AuthorName</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+else
+{
+	<h4>Нет новостей для отображения.</h4>
+}
+
+<h2>Памятные даты</h2>
+@if (Model.MemDates.Any())
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Текст</th>
+				<th>Дата события</th>
+				<th>Время ввода</th>
+				<th>Автор</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var memDateItem in Model.MemDates)
+			{
+				<tr>
+					<td>@memDateItem.TextNotification</td>
+					<td>@memDateItem.EventDate</td>
+					<td>@memDateItem.InputTime</td>
+					<td>@memDateItem.Name</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+else
+{
+	<h4>Нет памятных дат для отображения.</h4>
+}

@@ -14,6 +14,26 @@ namespace EventService.Repositories
             _context = context;
         }
 
+        public async Task<List<GetNewsVm>> GetNewsByDate(DateTime selectesDate)
+        {
+            var newsVmEntities = await _context.News
+                .Include(n => n.Author)
+                .Where(news => news.StartPublication <= selectesDate && news.EndPublication >= selectesDate)
+                .Select(n => new GetNewsVm(
+					n.Id,
+					n.StartPublication,
+					n.EndPublication,
+					n.Topic,
+					n.Text,
+					n.Importance,
+					n.InputTime,
+					n.Author.Name))
+				.AsNoTracking()
+				.ToListAsync();
+
+			return newsVmEntities;
+		}
+
         public async Task<List<GetNewsVm>> GetAllNews()
         {
             var newsVmEntities = await _context.News
