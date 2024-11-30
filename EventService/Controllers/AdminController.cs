@@ -12,7 +12,7 @@ namespace EventService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    //[Authorize]
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly ILogger<AdminController> _logger;
