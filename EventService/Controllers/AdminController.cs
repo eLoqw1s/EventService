@@ -43,10 +43,14 @@ namespace EventService.Controllers
         [HttpPost("CreateNews")]
         public async Task<IActionResult> CreateNews([FromForm] CreateNewsDto createNewsDto)
         {
-            var newsId = await _newsRepository.CreateNew(createNewsDto.StartPublication, createNewsDto.EndPublication,
+            if (ModelState.IsValid)
+            {
+                var newsId = await _newsRepository.CreateNew(createNewsDto.StartPublication, createNewsDto.EndPublication,
                 createNewsDto.Topic, createNewsDto.Text, createNewsDto.Importance, authorId);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            return View(createNewsDto);
         }
 
         [HttpGet("UpdateNews/{id:guid}")]
@@ -86,10 +90,14 @@ namespace EventService.Controllers
         [HttpPost("CreateMemDate")]
         public async Task<IActionResult> CreateMemDate([FromForm] CreateMemDateDto createMemDateDto)
         {
-            var memDateId = await _memorabeDateRepository.CreateMemDate(createMemDateDto.EventDate,
-				createMemDateDto.TextNotification, authorId);
+            if (ModelState.IsValid)
+            {
+                var memDateId = await _memorabeDateRepository.CreateMemDate(createMemDateDto.EventDate,
+                createMemDateDto.TextNotification, authorId);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            return View(createMemDateDto);
         }
 
 		[HttpGet("UpdateMemDate/{id:guid}")]
