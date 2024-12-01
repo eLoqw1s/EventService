@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace EventService.Views.Home
+namespace EventService.Views.Admin
 {
-    public class UpdateModel : PageModel
+    public class UpdateNewsModel : PageModel
     {
         public void OnGet()
         {

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using EventService.Interfaces;
 using EventService.Models.DTO.MemorableDates;
+using EventService.Exceptions;
 
 namespace EventService.Repositories
 {
@@ -56,7 +57,7 @@ namespace EventService.Repositories
 
 			if (memDateEntity == null)
 			{
-				throw new Exception("New not found");
+				throw new CustomException("Memorable date not found", 404);
 			}
 
 			return memDateEntity;
@@ -69,7 +70,7 @@ namespace EventService.Repositories
 
 			if (memDateEntity == null)
 			{
-				throw new Exception("news not found");
+				throw new CustomException("Memorable date not found", 404);
 			}
 
 			memDateEntity.EventDate = EventDate;
@@ -90,7 +91,7 @@ namespace EventService.Repositories
 
 			if (memDateEntity == 0)
 			{
-				throw new Exception("News not found");
+				throw new CustomException("Memorable date not found", 404);
 			}
 
 			return Id;

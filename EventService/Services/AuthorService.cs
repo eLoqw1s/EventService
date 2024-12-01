@@ -1,6 +1,6 @@
-﻿using EventService.Interfaces;
+﻿using EventService.Exceptions;
+using EventService.Interfaces;
 using EventService.Models;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace EventService.Services
 {
@@ -39,7 +39,7 @@ namespace EventService.Services
 
             if (!result)
             {
-                throw new Exception("failed login");
+                throw new CustomException("Failed login", 401);
             }
 
             var token = _jwtProvider.GenerateToken(authorEntity);

@@ -1,9 +1,6 @@
 ﻿using EventService.Models.DTO.Auth;
 using EventService.Services;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace EventService.Controllers
 {

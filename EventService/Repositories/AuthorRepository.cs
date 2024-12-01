@@ -1,4 +1,5 @@
-﻿using EventService.Interfaces;
+﻿using EventService.Exceptions;
+using EventService.Interfaces;
 using EventService.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +22,7 @@ namespace EventService.Repositories
 
             if (authorHaveAccountCheck != null)
             {
-                throw new Exception("The author already exists");
+                throw new CustomException("The author already exists", 409);
             }
 
             var authorEntity = new Author
@@ -44,7 +45,7 @@ namespace EventService.Repositories
 
             if (authorEntity == null)
             {
-                throw new Exception("Failed email");
+                throw new CustomException("Failed email", 401);
             }
 
             return authorEntity;

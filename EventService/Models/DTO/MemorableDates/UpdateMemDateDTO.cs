@@ -1,6 +1,6 @@
 ﻿namespace EventService.Models.DTO.MemorableDates
 {
-	public record UpdateMemDateDTO
+	public record UpdateMemDateDto
 	(
 		DateTime EventDate,
 		string TextNotification

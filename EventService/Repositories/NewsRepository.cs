@@ -1,4 +1,5 @@
-﻿using EventService.Interfaces;
+﻿using EventService.Exceptions;
+using EventService.Interfaces;
 using EventService.Models;
 using EventService.Models.DTO.News;
 using Microsoft.EntityFrameworkCore;
@@ -60,7 +61,7 @@ namespace EventService.Repositories
 
             if (newEntity == null)
             {
-                throw new Exception("New not found");
+                throw new CustomException("News not found", 404);
             }
 
             return newEntity;
@@ -73,8 +74,8 @@ namespace EventService.Repositories
 
             if (newsEntity == null)
             {
-                throw new Exception("news not found");
-            }
+                throw new CustomException("News not found", 404);
+			}
 
             newsEntity.Topic = Topic;
             newsEntity.Text = Text;
@@ -97,8 +98,8 @@ namespace EventService.Repositories
 
             if (newsRows == 0)
             {
-                throw new Exception("News not found");
-            }
+                throw new CustomException("News not found", 404);
+			}
 
             return Id;
         }

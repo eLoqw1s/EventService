@@ -8,15 +8,12 @@ namespace EventService.Controllers
 	[Route("[controller]")]
 	public class HomeController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
 		private readonly INewsRepository _newsRepository;
 		private readonly IMemorabeDateRepository _memorabeDateRepository;
 
-		public HomeController(ILogger<HomeController> logger,
-			INewsRepository newsRepository,
+		public HomeController(INewsRepository newsRepository,
 			IMemorabeDateRepository memorabeDateRepository)
         {
-			_logger = logger;
 			_newsRepository = newsRepository;
 			_memorabeDateRepository = memorabeDateRepository;
 		}
@@ -32,7 +29,6 @@ namespace EventService.Controllers
 				memDatesList
 				);
 
-			_logger.LogInformation("NewsId {@news}", newsList);
 			return View(model);
 		}
 

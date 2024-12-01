@@ -6,7 +6,6 @@ using EventService.Models.DTO.News;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Text.RegularExpressions;
 
 namespace EventService.Controllers
 {
@@ -15,17 +14,14 @@ namespace EventService.Controllers
     [Authorize]
     public class AdminController : Controller
     {
-        private readonly ILogger<AdminController> _logger;
         private readonly INewsRepository _newsRepository;
 		private readonly IMemorabeDateRepository _memorabeDateRepository;
 
 		private Guid authorId => new Guid(User.FindFirst("authorId").Value);
 
-        public AdminController(ILogger<AdminController> logger, 
-            INewsRepository newsRepository,
+        public AdminController(INewsRepository newsRepository,
             IMemorabeDateRepository memorabeDateRepository)
         {
-            _logger = logger;
             _newsRepository = newsRepository;
 			_memorabeDateRepository = memorabeDateRepository;
 		}
@@ -41,7 +37,6 @@ namespace EventService.Controllers
                 memDatesList
                 );
 
-            _logger.LogInformation("NewsId {@news}", newsList);
             return View(model);
         }
 
@@ -66,7 +61,7 @@ namespace EventService.Controllers
         }
 
         [HttpPost("UpdateNews/{id:guid}")]
-        public async Task<IActionResult> UpdateNews(Guid id, [FromForm] UpdateNewsDTO updateNewsDTO)
+        public async Task<IActionResult> UpdateNews(Guid id, [FromForm] UpdateNewsDto updateNewsDTO)
         {
             if (ModelState.IsValid)
             {
@@ -109,7 +104,7 @@ namespace EventService.Controllers
 		}
 
 		[HttpPost("UpdateMemDate/{id:guid}")]
-		public async Task<IActionResult> UpdateMemDate(Guid id, [FromForm] UpdateMemDateDTO updateMemDateDTO)
+		public async Task<IActionResult> UpdateMemDate(Guid id, [FromForm] UpdateMemDateDto updateMemDateDTO)
 		{
 			if (ModelState.IsValid)
 			{
@@ -128,8 +123,9 @@ namespace EventService.Controllers
 			return RedirectToAction("Index");
 		}
 
-		//-------------------------
+        //-------------------------
 
+        [AllowAnonymous]
 		[HttpGet("Error")]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
