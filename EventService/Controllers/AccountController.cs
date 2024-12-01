@@ -1,5 +1,5 @@
-﻿using EventService.Models.DTO.Auth;
-using EventService.Services;
+﻿using EventService.Interfaces;
+using EventService.Models.DTO.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventService.Controllers
@@ -8,9 +8,9 @@ namespace EventService.Controllers
     [Route("[controller]")]
     public class AccountController : Controller
     {
-        private readonly AuthorService _authorService;
+        private readonly IAuthorService _authorService;
 
-        public AccountController(AuthorService authorService)
+        public AccountController(IAuthorService authorService)
         {
             _authorService = authorService;
         }

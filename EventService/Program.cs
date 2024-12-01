@@ -26,7 +26,7 @@ builder.Services.AddDbContext<EventServicesDbContext>(
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
 builder.Services.AddScoped<IMemorabeDateRepository, MemorabeDateRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
-builder.Services.AddScoped<AuthorService>();
+builder.Services.AddScoped<IAuthorService, AuthorService>();
 builder.Services.AddScoped<IJwtProvider, JwtProvider>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
