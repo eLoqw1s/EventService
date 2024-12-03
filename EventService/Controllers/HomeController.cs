@@ -1,5 +1,5 @@
 ﻿using EventService.Interfaces;
-using EventService.Models.DTO.Admin;
+using EventService.Models.DTO.User;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventService.Controllers
@@ -24,7 +24,7 @@ namespace EventService.Controllers
 			var newsList = await _newsRepository.GetNewsByDate(selectedTime);
 			var memDatesList = await _memorabeDateRepository.GetMemDateByDate(selectedTime);
 
-			var model = new AdminVm(
+			var model = new UserVm(
 				newsList,
 				memDatesList
 				);

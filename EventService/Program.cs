@@ -20,7 +20,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<EventServicesDbContext>(
     options =>
     {
-        options.UseSqlite(builder.Configuration.GetConnectionString(nameof(EventServicesDbContext)));
+        options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(EventServicesDbContext)));
     });
 
 builder.Services.AddScoped<INewsRepository, NewsRepository>();
