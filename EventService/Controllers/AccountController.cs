@@ -21,17 +21,17 @@ namespace EventService.Controllers
         //    return View();
         //}
 
-        [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromForm] RegisterAuthorRequest request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(request);
-            }
-            await _authorService.Register(request.Name, request.Email, request.Password);
+        //[HttpPost("Register")]
+        //public async Task<IActionResult> Register([FromForm] RegisterAuthorRequest request)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(request);
+        //    }
+        //    await _authorService.Register(request.Name, request.Email, request.Password);
 
-            return RedirectToAction("Login");
-        }
+        //    return RedirectToAction("Login");
+        //}
 
         [HttpGet("Login")]
         public IActionResult Login()
